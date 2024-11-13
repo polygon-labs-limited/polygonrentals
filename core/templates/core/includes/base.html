@@ -1,0 +1,56 @@
+{% load static %}
+{% load custom_tags %}
+
+<link href="{% static '/css/styles.css' %}" rel="stylesheet">
+
+<div class="min-h-full" id="bg-el">
+    <nav class="bg-slate-900">
+      <div class="mx-auto max-w-7xl px-4 py-6  sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 text-white text-2xl font-sans">
+              <a href="/">Polygon Rentals <span>ltd</span></a>
+            </div>
+            <div class="hidden md:block">
+              <div class="ml-10 flex items-baseline space-x-4">
+                {% if request.user.is_authenticated %}
+                <a href="/properties" class="{% if page_name == 'properties' %}underline {% endif %}text-white rounded-md px-3 py-2 text-sm font-medium">Properties</a>
+                <a href="/analysis" class="{% if page_name == 'analysis' %}underline {% endif %}text-white rounded-md px-3 py-2 text-sm font-medium">Analysis</a>
+                <a href="/tools" class="{% if page_name == 'tools' %}underline {% endif %}text-white rounded-md px-3 py-2 text-sm font-medium">Tools</a>
+                {% else %}
+                <a href="/about" class="{% if page_name == 'about' %}underline {% endif %}text-white rounded-md px-3 py-2 text-sm font-medium">About us</a>
+                <a href="/properties" class="{% if page_name == 'properties' %}underline {% endif %}text-white rounded-md px-3 py-2 text-sm font-medium">Properties</a>
+                <a href="/news" class="{% if page_name == 'news' %}underline {% endif %}text-white rounded-md px-3 py-2 text-sm font-medium">News</a>
+                <a href="/contact" class="{% if page_name == 'contact' %}underline {% endif %}text-white rounded-md px-3 py-2 text-sm font-medium">Contact</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    </nav>
+    {% if page_name != 'landing' %}
+    <header class="bg-white shadow">
+      <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{page_title}}</h1>
+      </div>
+    </header>
+    {% endif %}
+    <main>
+      <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <div>
+            {% block content %}{% endblock %}
+        </div>
+      </div>
+    </main>
+    <footer class="bg-slate-900 sticky top-full">
+      <div class="mx-auto max-w-7xl px-4 py-1 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between">
+          <div class="flex items-center text-white text-xs">
+            © Copyright 2024 Polygon Rentals LTD registered in England and Wales, company number 11622434 
+          </div>
+        </div>
+    </div>
+    </footer>
+  </div>
+  {% block js %}{% endblock %}

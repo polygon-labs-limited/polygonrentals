@@ -1,0 +1,12 @@
+{% extends './includes/base.html' %}
+
+{% load static %}
+{% load custom_tags %}
+
+{% block content %}
+{% for object in object_list %}
+    <h2>{{ object.title }}</h2>
+    {{ object.content | safe }}
+    <hr />
+{% endfor %}
+{% endblock %}

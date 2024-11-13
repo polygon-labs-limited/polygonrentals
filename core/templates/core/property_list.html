@@ -1,0 +1,192 @@
+{% extends './includes/base.html' %} {% load custom_tags %} {% block content %}
+<!-- <div class="mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-4 lg:max-w-7xl lg:px-8">
+  <h2 class="text-2xl font-bold tracking-tight text-gray-900">Stats</h2>
+
+  <div
+    class="
+      mb-6
+      grid grid-cols-1
+      gap-x-6 gap-y-3
+      sm:grid-cols-2
+      lg:grid-cols-4
+      xl:gap-x-8
+    "
+  >
+    <div class="group relative">
+      <a href="/{{property.id}}">
+        <div class="mt-4 flex justify-between">
+          <div>
+            <h3 class="text-sm text-gray-700">
+              <span aria-hidden="true" class="absolute inset-0"></span>
+              Portfolio value
+            </h3>
+          </div>
+          <p class="text-sm font-medium text-gray-900">
+            {{portfolio_value|add_pound_sign}}
+          </p>
+        </div>
+      </a>
+    </div>
+
+    <div class="group relative">
+      <a href="/{{property.id}}">
+        <div class="mt-4 flex justify-between">
+          <div>
+            <h3 class="text-sm text-gray-700">
+              <span aria-hidden="true" class="absolute inset-0"></span>
+              LTV
+            </h3>
+          </div>
+          <p class="text-sm font-medium text-gray-900">{{ltv}}</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="group relative">
+      <a href="/{{property.id}}">
+        <div class="mt-4 flex justify-between">
+          <div>
+            <h3 class="text-sm text-gray-700">
+              <span aria-hidden="true" class="absolute inset-0"></span>
+              Current gross yield
+            </h3>
+          </div>
+          <p class="text-sm font-medium text-gray-900">
+            {{current_gross_yield}}
+          </p>
+        </div>
+      </a>
+    </div>
+
+    <div class="group relative">
+      <a href="/{{property.id}}">
+        <div class="mt-4 flex justify-between">
+          <div>
+            <h3 class="text-sm text-gray-700">
+              <span aria-hidden="true" class="absolute inset-0"></span>
+              Potential gross yield
+            </h3>
+          </div>
+          <p class="text-sm font-medium text-gray-900">
+            {{potential_gross_yield}}
+          </p>
+        </div>
+      </a>
+    </div>
+
+    <div class="group relative">
+      <a href="/{{property.id}}">
+        <div class="mt-4 flex justify-between">
+          <div>
+            <h3 class="text-sm text-gray-700">
+              <span aria-hidden="true" class="absolute inset-0"></span>
+              Rate of return
+            </h3>
+          </div>
+          <p class="text-sm font-medium text-gray-900">{{rate_of_return}}</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="group relative">
+      <a href="/{{property.id}}">
+        <div class="mt-4 flex justify-between">
+          <div>
+            <h3 class="text-sm text-gray-700">
+              <span aria-hidden="true" class="absolute inset-0"></span>
+              Doubling period
+            </h3>
+          </div>
+          <p class="text-sm font-medium text-gray-900">{{doubling_period}}</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="group relative">
+      <a href="/{{property.id}}">
+        <div class="mt-4 flex justify-between">
+          <div>
+            <h3 class="text-sm text-gray-700">
+              <span aria-hidden="true" class="absolute inset-0"></span>
+              Total income
+            </h3>
+          </div>
+          <p class="text-sm font-medium text-gray-900">
+            {{potential_rents|add_pound_sign}}
+          </p>
+        </div>
+      </a>
+    </div>
+
+    <div class="group relative">
+      <a href="/{{property.id}}">
+        <div class="mt-4 flex justify-between">
+          <div>
+            <h3 class="text-sm text-gray-700">
+              <span aria-hidden="true" class="absolute inset-0"></span>
+              Rental increase potential
+            </h3>
+          </div>
+          <p class="text-sm font-medium text-gray-900">
+            {{difference_in_rent}}
+          </p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <h2 class="mt-12 text-2xl font-bold tracking-tight text-gray-900">
+    Portfolio
+  </h2> -->
+
+  <div
+    class="
+      mt-6
+      grid grid-cols-1
+      gap-x-6 gap-y-10
+      sm:grid-cols-2
+      lg:grid-cols-4
+      xl:gap-x-8
+    "
+  >
+    {% for property in properties %}
+    <div class="group relative">
+      {% if request.user.is_authenticated %}
+      <a href="/{{property.id}}">
+      {% endif %}
+        <div
+          class="
+            aspect-h-1 aspect-w-1
+            w-full
+            overflow-hidden
+            rounded-md
+            bg-gray-200
+            lg:aspect-none
+            lg:h-80
+          "
+        >
+          <img
+            src="/media/{{ property.photo }}"
+            alt=""
+            class="h-full w-full object-cover object-center lg:h-full lg:w-full {% if not request.user.is_authenticated %}opacity-50{% endif %}"
+          />
+        </div>
+        <div class="mt-4 flex- justify-between">
+          <div>
+            <h3 class="text-sm text-gray-700">
+              <span aria-hidden="true" class="absolute inset-0"></span>
+              {{property.address}}
+            </h3>
+          </div>
+          <p class="text-sm font-medium text-gray-900 mb-2">{{property.city}}</p>
+          {% if not request.user.is_authenticated %}
+          <span class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Unavailable</span>
+          {% endif %}
+        </div>
+      {% if request.user.is_authenticated %}
+      </a>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

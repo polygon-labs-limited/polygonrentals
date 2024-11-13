@@ -1,0 +1,24 @@
+{% extends './includes/base.html' %}
+
+{% load static %}
+{% load custom_tags %}
+
+{% block content %}
+<a href="/properties">&lt; Back</a>
+<div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 xl:gap-x-8">
+    <div class="group relative">
+        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-120">
+            <img src="/media/{{ object.photo }}"" alt="" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+        </div>
+    </div>
+
+    <div class="group relative">
+        <div class="mt-4 flex justify-between">
+            <div>
+                <p><span class="text-sm font-medium text-gray-900">Address: </span><span class="mt-1 text-sm text-gray-500">{{property.address}}</span></p>
+                <p><span class="text-sm font-medium text-gray-900">Value: </span><span class="mt-1 text-sm text-gray-500">{{property.value|add_pound_sign}}</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
